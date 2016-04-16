@@ -1,0 +1,52 @@
+﻿<Window x:Class="MVVMLightExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMLightExample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <DockPanel LastChildFill="True" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+
+        <ListBox DockPanel.Dock="Left" ItemsSource="{Binding EmployeeList}" DisplayMemberPath="ID" SelectedItem="{Binding SelectedEmployee}" Width="100" />
+
+        <DockPanel DockPanel.Dock="Bottom">
+            <Button DockPanel.Dock="Left" Content="Load Employees" Width="200" Height="25" Command="{Binding LoadEmployeesCommand}" />
+            <Button DockPanel.Dock="Right" Content="Save Employees" Width="200" Height="25" Command="{Binding SaveEmployeesCommand}" />
+        </DockPanel>
+
+        <Grid>
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="Margin" Value="10,10,0,0" />
+                </Style>
+                <Style TargetType="{x:Type Label}">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="ID" />
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedEmployee.ID}" />
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Name" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedEmployee.Name}" />
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Age" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedEmployee.Age}" />
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Salary" />
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedEmployee.Salary}" />
+        </Grid>
+    </DockPanel>
+</Window>
