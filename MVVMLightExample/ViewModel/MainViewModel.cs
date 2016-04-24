@@ -9,42 +9,31 @@ namespace MVVMLightExample.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private ObservableCollection<Employee> _employees;
-        private Employee _selectedEmployee;
-
-        public ICommand LoadEmployeesCommand { get; set; }
-        public ICommand SaveEmployeesCommand { get; set; }
+        private ViewModelBase _currentViewModel;
+        readonly static EmployeesViewModel _employeeViewModel = new EmployeesViewModel();
 
         public MainViewModel()
         {
-            LoadEmployeesCommand = new RelayCommand(LoadEmployeesMethod);
-            SaveEmployeesCommand = new RelayCommand(SaveEmployeeMethod);
+            CurrentViewModel = _employeeViewModel;
+            ActivateEmployeesViewCommand = new RelayCommand(ActivateEmployeesView);
         }
 
-        public ObservableCollection<Employee> EmployeeList { get { return _employees; }}
-
-        public Employee SelectedEmployee { get { return _selectedEmployee; }
+        public ViewModelBase CurrentViewModel {
+            get { return _currentViewModel; }
             set
             {
-                if(_selectedEmployee != value)
-                {
-                    _selectedEmployee = value;
-                    RaisePropertyChanged(() => SelectedEmployee);
-                }
+                if (_currentViewModel == value)
+                    return;
+                _currentViewModel = value;
+                RaisePropertyChanged(() => CurrentViewModel);
             }
         }
 
-        //Command methods
-        public void SaveEmployeeMethod()
-        {
-            Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Employees Saved"));
-        }
+        public ICommand ActivateEmployeesViewCommand { get; set; }
 
-        public void LoadEmployeesMethod()
+        private void ActivateEmployeesView()
         {
-            _employees = Employee.GetAllEmployees();
-            RaisePropertyChanged(() => EmployeeList);
-            Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Employees Loaded"));
+            CurrentViewModel = _employeeViewModel;
         }
     }
 }
