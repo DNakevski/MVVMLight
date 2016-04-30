@@ -6,12 +6,17 @@
         xmlns:local="clr-namespace:MVVMLightExample"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1000">
-
-
+    
     <DockPanel LastChildFill="True" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
-        <ItemsControl DockPanel.Dock="Left" Width="100">
-            <Button Content="Second View" />
-            <Button Content="First View" />
+        <ItemsControl DockPanel.Dock="Left" Width="100" ItemsSource="{Binding PageViewModels}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding DisplayName}"
+                            Command="{Binding DataContext.ChangeViewCommand, RelativeSource={RelativeSource AncestorType={x:Type DockPanel}}}"
+                            CommandParameter="{Binding}"
+                            Margin="2,5"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
         <WrapPanel>
             <ContentControl Content="{Binding CurrentViewModel}" />

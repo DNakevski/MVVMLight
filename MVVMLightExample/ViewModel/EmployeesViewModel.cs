@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using MVVMLightExample.Models;
+using MVVMLightExample.ViewModel.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,8 +13,13 @@ using System.Windows.Input;
 
 namespace MVVMLightExample.ViewModel
 {
-    public class EmployeesViewModel : ViewModelBase
+    public class EmployeesViewModel : ViewModelBase, INavigationPageInfo
     {
+        //navigation info parameteres
+        private const string _name = "EmployeesView";
+        private const string _displayName = "Employees View";
+        private bool _isVisible = true;
+
         private ObservableCollection<Employee> _employees;
         private Employee _selectedEmployee;
 
@@ -38,6 +44,25 @@ namespace MVVMLightExample.ViewModel
                     _selectedEmployee = value;
                     RaisePropertyChanged(() => SelectedEmployee);
                 }
+            }
+        }
+
+        //Page navigation info properties
+        public string Name { get { return _name; } }
+        public string DisplayName { get { return _displayName; } }
+        public bool IsVisible
+        {
+            get
+            {
+                return _isVisible;
+            }
+
+            set
+            {
+                if (_isVisible == value)
+                    return;
+                _isVisible = value;
+                RaisePropertyChanged(() => IsVisible);
             }
         }
 

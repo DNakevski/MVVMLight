@@ -75,12 +75,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Infrastructure\CustomRelayCommand.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="ViewModel\EmployeesViewModel.cs" />
+    <Compile Include="ViewModel\HomePageViewModel.cs" />
+    <Compile Include="ViewModel\Interfaces\INavigationPageInfo.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\EmployeesUserControl.xaml.cs">
       <DependentUpon>EmployeesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HomeViewUserControl.xaml.cs">
+      <DependentUpon>HomeViewUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +101,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\EmployeesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HomeViewUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

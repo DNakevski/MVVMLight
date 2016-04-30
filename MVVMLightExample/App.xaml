@@ -16,6 +16,9 @@
             <DataTemplate DataType="{x:Type vm:EmployeesViewModel}">
                 <views:EmployeesUserControl />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:HomePageViewModel}">
+                <views:HomeViewUserControl />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
