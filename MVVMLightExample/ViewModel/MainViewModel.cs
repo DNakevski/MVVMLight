@@ -13,8 +13,6 @@ namespace MVVMLightExample.ViewModel
         private INavigationPageInfo _currentViewModel;
         List<INavigationPageInfo> _pageViewModels;
 
-        readonly static EmployeesViewModel _employeeViewModel = new EmployeesViewModel();
-
         public MainViewModel()
         {
             //register the active pages
@@ -47,26 +45,26 @@ namespace MVVMLightExample.ViewModel
             }
         }
 
+        public ICommand ChangeViewCommand
+        {
+            get
+            {
+                if (_changeViewCommand == null)
+                {
+                    _changeViewCommand = new CustomRelayCommand(
+                    p => ChangeViewModel((INavigationPageInfo)p),
+                    p => p is INavigationPageInfo);
+                }
+                return _changeViewCommand;
+            }
+        }
+
         private void ChangeViewModel(INavigationPageInfo viewModel)
         {
             if (!PageViewModels.Contains(viewModel))
                 PageViewModels.Add(viewModel);
 
             CurrentViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
-        }
-
-        public ICommand ChangeViewCommand
-        {
-            get
-            {
-                if(_changeViewCommand == null)
-                {
-                    _changeViewCommand = new CustomRelayCommand(
-                    p => ChangeViewModel((INavigationPageInfo) p),
-                    p => p is INavigationPageInfo);
-                }
-                return _changeViewCommand;
-            }
         }
     }
 }

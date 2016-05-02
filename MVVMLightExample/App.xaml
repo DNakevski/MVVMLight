@@ -19,6 +19,7 @@
             <DataTemplate DataType="{x:Type vm:HomePageViewModel}">
                 <views:HomeViewUserControl />
             </DataTemplate>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
